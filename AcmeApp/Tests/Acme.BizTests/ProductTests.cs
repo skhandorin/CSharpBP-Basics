@@ -104,5 +104,128 @@ namespace Acme.Biz.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void ProductName_Format()
+        {
+            var currentProduct = new Product();
+            currentProduct.ProductName = "  Steel Hammer   ";
+
+            var expected = "Steel Hammer";
+
+            var actual = currentProduct.ProductName;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void ProductName_TooShort()
+        {
+            var currentProduct = new Product();
+            currentProduct.ProductName = "aw";
+
+            string expected = null;
+            string expectedMessage = "Product Name must be at least 3 characters";
+
+            var actual = currentProduct.ProductName;
+            var actualMessage = currentProduct.ValidationMessage;
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+
+        [TestMethod()]
+        public void ProductName_TooLong()
+        {
+            var currentProduct = new Product();
+            currentProduct.ProductName = "Steel Bladed Hand Saw";
+
+            string expected = null;
+            string expectedMessage = "Product Name cannot be more than 20 characters";
+
+            var actual = currentProduct.ProductName;
+            var actualMessage = currentProduct.ValidationMessage;
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+
+        [TestMethod()]
+        public void ProductName_JustRight()
+        {
+            var currentProduct = new Product();
+            currentProduct.ProductName = "Saw";
+
+            string expected = "Saw";
+            string expectedMessage = null;
+
+            var actual = currentProduct.ProductName;
+            var actualMessage = currentProduct.ValidationMessage;
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedMessage, actualMessage);
+        }
+
+        [TestMethod()]
+        public void Category_DefaultValue()
+        {
+            var currentProduct = new Product();
+
+            var expected = "Tools";
+
+            var actual = currentProduct.Category;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void Category_NewValue()
+        {
+            var currentProduct = new Product();
+            currentProduct.Category = "Garden";
+
+            var expected = "Garden";
+
+            var actual = currentProduct.Category;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void Sequence_DefaultValue()
+        {
+            var currentProduct = new Product();
+
+            var expected = 1;
+
+            var actual = currentProduct.SequenceNumber;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void Sequence_NewValue()
+        {
+            var currentProduct = new Product();
+            currentProduct.SequenceNumber = 5;
+
+            var expected = 5;
+
+            var actual = currentProduct.SequenceNumber;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void ProductCode_DefaultValue()
+        {
+            var currentProduct = new Product();
+
+            var expected = "Tools-1";
+
+            var actual = currentProduct.ProductCode;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
