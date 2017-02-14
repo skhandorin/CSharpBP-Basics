@@ -47,6 +47,8 @@ namespace Acme.Biz
             set { availabilityDate = value; }
         }
 
+        public decimal Cost { get; set; }
+        
         private string productName;
 
         public string ProductName
@@ -109,6 +111,15 @@ namespace Acme.Biz
         public string ValidationMessage { get; private set; }
         #endregion
 
+        /// <summary>
+        /// Calculates the suggested retail price
+        /// </summary>
+        /// <param name="markupPercent">Percent used to markup the cost.</param>
+        /// <returns></returns>
+        public decimal CalculateSuggestedPrice(decimal markupPercent) =>
+            this.Cost + (this.Cost * markupPercent / 100);
+
+
         public string SayHello()
         {
             //var vendor = new Vendor();
@@ -122,5 +133,9 @@ namespace Acme.Biz
             return "Hello " + ProductName + " (" + ProductId + "): " + Description +
                     " Available on: " + AvailabilityDate?.ToShortDateString();
         }
+
+        public override string ToString() =>
+            this.ProductName + " (" + this.ProductId + ")";
+
     }
 }
