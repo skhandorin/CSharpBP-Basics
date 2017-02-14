@@ -86,7 +86,7 @@ namespace Acme.Biz.Tests
 
         [TestMethod()]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void PlaceOrder_NullProduct_Esception()
+        public void PlaceOrder_NullProduct_Exception()
         {
             var vendor = new Vendor();
 
